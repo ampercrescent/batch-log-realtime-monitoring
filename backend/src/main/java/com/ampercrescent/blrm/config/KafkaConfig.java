@@ -7,10 +7,9 @@ import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
 public class KafkaConfig {
-
     @Bean
-    public NewTopic logTopic() {
-        return TopicBuilder.name("log-topic")
+    public NewTopic logTopic(AppProperties appProperties) {
+        return TopicBuilder.name(appProperties.getKafka().getTopic())
                 .partitions(3)
                 .replicas(1)
                 .build();
