@@ -1,17 +1,13 @@
 server:
   port: 8080
 
-spring:
+app:
   kafka:
     bootstrap-servers: localhost:9092
+    topic: log-topic
     consumer:
       group-id: log-group
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
   elasticsearch:
-    uris: http://localhost:9200
-
-scheduler:
-  interval: 500
+    baseUrl: http://localhost:9200
