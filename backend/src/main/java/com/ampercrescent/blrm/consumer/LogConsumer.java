@@ -13,7 +13,7 @@ public class LogConsumer {
 
     public LogConsumer(LogService logService) {
         this.logService = logService;
-        this.sink = Sinks.many().multicast().onBackpressureBuffer();
+        this.sink = Sinks.many().multicast().directAllOrNothing();
     }
 
     @KafkaListener(
@@ -27,6 +27,6 @@ public class LogConsumer {
     }
 
     public Flux<String> streamLogs() {
-        return sink.asFlux();
+        return sink.asFlux().doOnCancel(() -> System.out.println("SSE 연결 종료"));
     }
 }

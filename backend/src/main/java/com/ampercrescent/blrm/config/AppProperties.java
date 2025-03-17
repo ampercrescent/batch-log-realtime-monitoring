@@ -5,6 +5,8 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Configuration
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppProperties {
     private KafkaProperties kafka;
     private ElasticsearchProperties elasticsearch;
+    private CosProperties cors;
 
     @Getter
     @Setter
@@ -32,5 +35,12 @@ public class AppProperties {
     @Setter
     public static class ElasticsearchProperties{
         private String baseUrl;
+    }
+
+    @Getter
+    @Setter
+    public static class CosProperties {
+        private List<String> allowedOrigins;
+        private List<String> methods;
     }
 }
